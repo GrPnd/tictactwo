@@ -1,0 +1,22 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">TIC-TAC-TWO</h1>
+</div>
+
+
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div class="d-grid gap-2 d-md-block position-absolute top-50 start-50 translate-middle">
+                <button type="submit" name="action" value="newGame" class="btn btn-outline-primary">Play new game</button>
+                <button type="submit" name="action" value="loadGame" class="btn btn-outline-primary">Load game</button>
+                <button type="submit" name="action" value="rules" class="btn btn-outline-primary">Tic-Tac-Two rules</button>
+            </div>
+        </form>
+    </div>
+</div>

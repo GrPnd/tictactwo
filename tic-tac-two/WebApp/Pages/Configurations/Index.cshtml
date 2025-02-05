@@ -1,0 +1,102 @@
+@page
+@model WebApp.Pages_Configurations.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Configuration[0].ConfigName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Configuration[0].BoardSizeWidth)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Configuration[0].BoardSizeHeight)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Configuration[0].WinCondition)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Configuration[0].NumberOfPieces)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Configuration[0].MoveGridAfterNMoves)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Configuration[0].MovePieceAfterNMoves)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Configuration[0].GridSizeWidth)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Configuration[0].GridSizeHeight)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Configuration[0].UsesGrid)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Configuration[0].CreatedAt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Configuration[0].ModifiedAt)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Configuration) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ConfigName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BoardSizeWidth)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BoardSizeHeight)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WinCondition)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumberOfPieces)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MoveGridAfterNMoves)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MovePieceAfterNMoves)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GridSizeWidth)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GridSizeHeight)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UsesGrid)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedAt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ModifiedAt)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

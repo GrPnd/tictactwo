@@ -1,0 +1,25 @@
+﻿@page
+@model WebApp.Pages.GridCoordinates
+
+<h1>Grid coordinates</h1>
+
+<div class="d-inline-block border rounded px-3 py-2 bg-light">
+    <h6 class="m-0 text-danger">@Model.ErrorMsg</h6>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div class="mb-3">
+                <label for="GridStartX" class="form-label">Grid Start X</label>
+                <input type="text" class="form-control" id="GridStartX" name="GridStartX">
+            </div>
+            <div class="mb-3">
+                <label for="GridStartY" class="form-label">Grid Start Y</label>
+                <input type="text" class="form-control" id="GridStartY" name="GridStartY">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Start playing!</button>
+        </form>
+    </div>
+</div>

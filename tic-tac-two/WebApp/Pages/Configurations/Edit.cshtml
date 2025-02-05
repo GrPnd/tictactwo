@@ -1,0 +1,102 @@
+@page
+@model WebApp.Pages_Configurations.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Configuration</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                
+                <label asp-for="Configuration.ConfigName" class="control-label"></label>
+                <input asp-for="Configuration.ConfigName" class="form-control" />
+                <span asp-validation-for="Configuration.ConfigName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                
+                <label asp-for="Configuration.BoardSizeWidth" class="control-label"></label>
+                <input asp-for="Configuration.BoardSizeWidth" class="form-control" />
+                <span asp-validation-for="Configuration.BoardSizeWidth" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                
+                <label asp-for="Configuration.BoardSizeHeight" class="control-label"></label>
+                <input asp-for="Configuration.BoardSizeHeight" class="form-control" />
+                <span asp-validation-for="Configuration.BoardSizeHeight" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                
+                <label asp-for="Configuration.WinCondition" class="control-label"></label>
+                <input asp-for="Configuration.WinCondition" class="form-control" />
+                <span asp-validation-for="Configuration.WinCondition" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                
+                <label asp-for="Configuration.NumberOfPieces" class="control-label"></label>
+                <input asp-for="Configuration.NumberOfPieces" class="form-control" />
+                <span asp-validation-for="Configuration.NumberOfPieces" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                
+                <label asp-for="Configuration.MoveGridAfterNMoves" class="control-label"></label>
+                <input asp-for="Configuration.MoveGridAfterNMoves" class="form-control" />
+                <span asp-validation-for="Configuration.MoveGridAfterNMoves" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                
+                <label asp-for="Configuration.MovePieceAfterNMoves" class="control-label"></label>
+                <input asp-for="Configuration.MovePieceAfterNMoves" class="form-control" />
+                <span asp-validation-for="Configuration.MovePieceAfterNMoves" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                
+                <label asp-for="Configuration.GridSizeWidth" class="control-label"></label>
+                <input asp-for="Configuration.GridSizeWidth" class="form-control" />
+                <span asp-validation-for="Configuration.GridSizeWidth" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                
+                <label asp-for="Configuration.GridSizeHeight" class="control-label"></label>
+                <input asp-for="Configuration.GridSizeHeight" class="form-control" />
+                <span asp-validation-for="Configuration.GridSizeHeight" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Configuration.UsesGrid" /> @Html.DisplayNameFor(model => model.Configuration.UsesGrid)
+                </label>
+            </div>
+            <input type="hidden" asp-for="Configuration.Id" />
+            <div class="form-group">
+                
+                <label asp-for="Configuration.CreatedAt" class="control-label"></label>
+                <input asp-for="Configuration.CreatedAt" class="form-control" />
+                <span asp-validation-for="Configuration.CreatedAt" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                
+                <label asp-for="Configuration.ModifiedAt" class="control-label"></label>
+                <input asp-for="Configuration.ModifiedAt" class="form-control" />
+                <span asp-validation-for="Configuration.ModifiedAt" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

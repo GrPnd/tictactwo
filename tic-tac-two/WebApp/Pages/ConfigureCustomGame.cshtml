@@ -1,0 +1,82 @@
+﻿@page
+@model WebApp.Pages.ConfigureCustomGame
+
+<h1>Configure Your Custom Game</h1>
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            @if (Model.Errors?.Any() == true)
+            {
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach (var error in Model.Errors)
+                    {
+                    <li>@error</li>
+                    }
+                </ul>
+            </div>
+            }
+            
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="BoardSizeWidth">Board Width - Board width must be between 2 and 20</label>
+                <input asp-for="BoardSizeWidth" class="form-control"/>
+                <span asp-validation-for="BoardSizeWidth" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="BoardSizeHeight">Board Height - Board height must be between 2 and 20</label>
+                <input asp-for="BoardSizeHeight" class="form-control"/>
+                <span asp-validation-for="BoardSizeHeight" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="NumberOfPieces">Number of pieces - Piece number must be between 2 and 100</label>
+                <input asp-for="NumberOfPieces" class="form-control"/>
+                <span asp-validation-for="NumberOfPieces" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="WinCondition">Win Condition - Win condition must be between 2 and 10 + cant be bigger than Piece Number</label>
+                <input asp-for="WinCondition" class="form-control"/>
+                <span asp-validation-for="WinCondition" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="MovePieceAfterNMoves">Move pieces after n move - must be a positive number</label>
+                <input asp-for="MovePieceAfterNMoves" class="form-control"/>
+                <span asp-validation-for="MovePieceAfterNMoves" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="UsesGrid">Want grid in your game?</label>
+                <input asp-for="UsesGrid" type="checkbox" class=""/>
+                <span asp-validation-for="UsesGrid" class="text-danger"></span>
+            </div>
+            
+            
+            <div class="grid-fields">
+                <div class="form-group">
+                    <label asp-for="GridSizeWidth">Grid Width - Grid width must be between WinCondition and BoardWidth</label>
+                    <input asp-for="GridSizeWidth" class="form-control"/>
+                    <span asp-validation-for="GridSizeWidth" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="GridSizeHeight">Grid Height - Grid height must be between WinCondition and BoardHeight</label>
+                    <input asp-for="GridSizeHeight" class="form-control"/>
+                    <span asp-validation-for="GridSizeHeight" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="MoveGridAfterNMoves">Move grid after n move - must be a positive number</label>
+                    <input asp-for="MoveGridAfterNMoves" class="form-control"/>
+                    <span asp-validation-for="MoveGridAfterNMoves" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Confirm" class="btn btn-primary"/>
+            </div>
+        </form>
+    </div>
+</div>

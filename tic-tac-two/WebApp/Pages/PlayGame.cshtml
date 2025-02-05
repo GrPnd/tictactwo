@@ -1,0 +1,150 @@
+﻿@page
+@model WebApp.Pages.PlayGame
+
+<!-- Bootstrap Icons CDN -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+<link rel="stylesheet" href="~/css/playGameTable.css"/>
+
+<div class="container mt-5">
+    <div class="d-inline-block border rounded px-3 py-2 bg-light">
+        <h5 class="m-0 text-success">@Model.Message</h5>
+        <h5 class="m-0 text-danger">@Model.ErrorMsg</h5>
+    </div>
+</div>
+
+
+
+<form method="post">
+    <input type="hidden" name="Password" value="@Model.Password"/>
+
+
+    <table class="center-table">
+        @for (int y = 0; y < Model.TicTacTwoBrain.DimYBoard; y++)
+        {
+            <tr>
+                @for (int x = 0; x < Model.TicTacTwoBrain.DimXBoard; x++)
+                {
+                    string buttonClass = Model.TicTacTwoBrain.IsCellInGrid(x, y) ? "btn-warning" : "btn-outline-primary";
+
+
+                    <td class="cell">
+                        @if (Model.GameNotOverAndIsPlayersTurn())
+                        {
+                            @if (Model.IsCellEmpty(x, y))
+                            {
+                                <button type="submit" class="btn @buttonClass game-button" name="x" value="@x" formaction="?y=@y&gameName=@Model.GameName"></button>
+                            }
+                            else if (Model.CanPlayerMovePiece(x, y))
+                            {
+                                <button type="submit" class="btn @buttonClass game-button" name="selectedX" value="@x" formaction="?selectedY=@y&gameName=@Model.GameName">
+                                    @(Model.TicTacTwoBrain.GameBoard[x][y])
+                                </button>
+                            }
+                            else
+                            {
+                                <button type="button" class="btn @buttonClass game-button" disabled>@(Model.TicTacTwoBrain.GameBoard[x][y])</button>
+                            }
+                        }
+                        else
+                        {
+                            @if (Model.IsCellEmpty(x, y))
+                            {
+                                <button type="submit" class="btn @buttonClass game-button" disabled></button>
+                            }
+                            else
+                            {
+                                <button type="button" class="btn @buttonClass game-button" disabled>@(Model.TicTacTwoBrain.GameBoard[x][y])</button>
+                            }
+                        }
+                    </td>
+                }
+            </tr>
+        }
+    </table>
+
+
+    <div class="text-center mt-3">
+        @if (string.IsNullOrEmpty(Model.Message))
+        {
+            <div>Next move by: @Model.TicTacTwoBrain.GetNextMoveBy()</div>
+            <div>
+                Remaining pieces X: @Model.TicTacTwoBrain.GameState.RemainingPiecesX
+            </div>
+
+            <div>
+                Remaining pieces O: @Model.TicTacTwoBrain.GameState.RemainingPiecesO
+            </div>
+            @if (Model.TicTacTwoBrain.PasswordMatchesPlayer(Model.Password, Model.TicTacTwoBrain.GameState.NextMoveBy))
+            {
+                <div>Choices:</div>
+
+                <div>
+                    <label>Make a new move (press on an empty spot)</label>
+                </div>
+
+                @if (Model.TicTacTwoBrain.ShouldMovePiece(Model.TicTacTwoBrain.GameState.NextMoveBy))
+                {
+                    <div>
+                        <label>Move existing piece (press on your existing game piece and then on an empty spot)</label>
+                    </div>
+                }
+
+                @if (Model.TicTacTwoBrain.ShouldMoveGrid(Model.TicTacTwoBrain.GameState.NextMoveBy) && (bool)TempData["MovedPiece"] == false)
+                {
+                    <div>
+                        <label>Move grid (select)</label>
+                        <div class="button-container mt-2">
+                            <div class="compass-grid">
+                                <!-- Up-West (Up-Left) -->
+                                <button type="submit" class="btn btn-outline-secondary arrow-btn" name="GridDirection" value="UpLeft" formaction="?gameName=@Model.GameName">
+                                    <i class="bi bi-arrow-up-left-circle-fill"></i>
+                                </button>
+                                <!-- North (Up) -->
+                                <button type="submit" class="btn btn-outline-secondary arrow-btn" name="GridDirection" value="Up" formaction="?gameName=@Model.GameName">
+                                    <i class="bi bi-arrow-up-circle-fill"></i>
+                                </button>
+                                <!-- North-East (Up-Right) -->
+                                <button type="submit" class="btn btn-outline-secondary arrow-btn" name="GridDirection" value="UpRight" formaction="?gameName=@Model.GameName">
+                                    <i class="bi bi-arrow-up-right-circle-fill"></i>
+                                </button>
+                                <!-- West (Left) -->
+                                <button type="submit" class="btn btn-outline-secondary arrow-btn" name="GridDirection" value="Left" formaction="?gameName=@Model.GameName">
+                                    <i class="bi bi-arrow-left-circle-fill"></i>
+                                </button>
+                                <!-- Center (Empty Button) -->
+                                <button type="button" class="btn btn-outline-secondary arrow-btn center-btn"></button>
+                                <!-- East (Right) -->
+                                <button type="submit" class="btn btn-outline-secondary arrow-btn" name="GridDirection" value="Right" formaction="?gameName=@Model.GameName">
+                                    <i class="bi bi-arrow-right-circle-fill"></i>
+                                </button>
+                                <!-- South-West (Down-Left) -->
+                                <button type="submit" class="btn btn-outline-secondary arrow-btn" name="GridDirection" value="DownLeft" formaction="?gameName=@Model.GameName">
+                                    <i class="bi bi-arrow-down-left-circle-fill"></i>
+                                </button>
+                                <!-- South (Down) -->
+                                <button type="submit" class="btn btn-outline-secondary arrow-btn" name="GridDirection" value="Down" formaction="?gameName=@Model.GameName">
+                                    <i class="bi bi-arrow-down-circle-fill"></i>
+                                </button>
+                                <!-- South-East (Down-Right) -->
+                                <button type="submit" class="btn btn-outline-secondary arrow-btn" name="GridDirection" value="DownRight" formaction="?gameName=@Model.GameName">
+                                    <i class="bi bi-arrow-down-right-circle-fill"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <div>Not your turn!</div>
+            }
+        }
+        else
+        {
+            <div class="button-container mt-2">
+                <button type="submit" name="reset" value="true" class="btn btn-danger">Reset Game</button>
+            </div>
+        }
+
+    </div>
+</form>
